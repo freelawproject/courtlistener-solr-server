@@ -24,9 +24,3 @@
       dest="/usr/local/solr/example/solr/recap/conf/schema.xml"
       state=link
       force=yes
-  - name: restart solr
-    become: yes
-    become_user: root
-    service:
-      name=solr
-      state=restarted

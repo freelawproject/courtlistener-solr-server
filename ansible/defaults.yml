@@ -1,6 +1,10 @@
 ---
+# Core configs
+solr_default_core: opinion
+solr_cores:
+  - opinion
+  - audio
+  - opinion
+  - recap
+  - person
 
-install_root: "/var/www/courtlistener"
-virtualenv_root: "/var/www/.virtualenvs/courtlistener"
-solr_xmx: "20G"
-web_user: 'www-data'

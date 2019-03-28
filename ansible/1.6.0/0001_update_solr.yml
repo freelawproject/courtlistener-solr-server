@@ -2,49 +2,9 @@
 
 # Whatever it takes to update Solr from 4.1 from 4.10.4, according to:
 # https://github.com/freelawproject/courtlistener/issues/567
-- hosts: celery
-  tasks:
-  - include_vars: ../defaults.yml
-  - name: stop celery (this stops data going to Solr)
-    become: yes
-    become_user: root
-    service:
-      name=celeryd
-      state=stopped
-
 - hosts: solr
   tasks:
   - include_vars: ../defaults.yml
-  - name: optimize all solr cores
-    django_manage:
-      app_path={{ install_root }}
-      command="cl_update_index --optimize-everything"
-      virtualenv={{ virtualenv_root }}
-    async: 10000
-    poll: 0
-    register: solr_sleeper
-  - name: download solr
-    become: yes
-    become_user: root
-    get_url:
-      url="https://archive.apache.org/dist/lucene/solr/4.10.4/solr-4.10.4.tgz"
-      dest=/tmp/solr-4.10.4.tgz
-      mode=0644
-      checksum="sha1:0edf666bea51990524e520bdcb811e14b4de4c41"
-  - name: unarchive solr
-    become: yes
-    become_user: root
-    unarchive:
-      copy=no
-      src=/tmp/solr-4.10.4.tgz
-      dest=/usr/local
-      creates=/usr/local/solr-4.10.4
-  - name: wait for solr optimize to finish
-    async_status: jid={{ solr_sleeper.ansible_job_id }}
-    register: job_result
-    until: job_result.finished
-    retries: 999
-    delay: 10
 
   # Set up new Solr with old cores and configs
   - name: copy old core configs to new Solr
