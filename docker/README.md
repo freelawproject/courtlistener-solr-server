@@ -15,6 +15,8 @@ solr install, simply:
              --volume /home/username/projects/courtlistener-solr-server/solr/cores:/etc/opt/solr:ro \
              --volume /home/username/projects/data/courtlistener/solr:/var/opt/solr/indices \
              -p 127.0.0.1:8983:8983 \
+             --log-driver journald \
+             --name solr \
              freelawproject/solr 
 
 Some explanation is in order:
@@ -37,7 +39,26 @@ directory shown above.
 
 1. Next we map the local port to the container port.
 
+1. `--log-driver journald` sends stdout and stderr to journalctl.
+
+1. `--name solr` gives it a name (so we can see it in our logs, among other
+   reasons).
+
 1. Finally, we list the name of the image to download (if needed) and run.
+
+
+## Viewing logs
+
+The command above advises using journald for the logs. To view the logs, run:
+
+    journalctl -f CONTAINER_NAME=solr
+    
+If that doesn't work, it's probably because the name of the container changed
+somehow. Figure out the correct name by using:
+
+    docker container ls
+    
+And look at the NAME column.
 
 
 ## Adding Cores
