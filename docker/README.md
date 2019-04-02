@@ -67,6 +67,20 @@ directory shown above.
 1. Finally, we list the name of the image to download (if needed) and run.
 
 
+## Building new versions:
+
+I'm not good at this yet, so suggestions welcome here. In the meantime, I'm 
+just building new versions using:
+
+    docker build --tag=freelawproject/solr:0.2 .
+    
+Then I push with:
+
+    docker push freelawproject/solr:0.2
+    
+Simply bumping the version as things go along.
+ 
+
 ## Viewing logs
 
 The command above advises using journald for the logs. To view the logs, run:
