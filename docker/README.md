@@ -34,7 +34,7 @@ solr install, simply:
              --cpus 32 \
              --volume /home/username/projects/courtlistener-solr-server/solr/cores:/etc/opt/solr:ro \
              --volume /home/username/projects/data/courtlistener/solr:/var/opt/solr/indices \
-             -p 127.0.0.1:8983:8983 \
+             -p 8983:8983 \
              --log-driver journald \
              --name solr \
              freelawproject/solr 
