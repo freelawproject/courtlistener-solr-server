@@ -7,6 +7,26 @@ solr install, simply:
 
 1. Install Docker
 
+1. Create a directory on the host machine to store solr indicies, or select the
+   one you have already. Then, add that directory to group ID 1024 and set make
+   the group ID apply to new directories too:
+   
+       chown -R :1024 /data/myvolume
+       find /data/myvolume -type d -exec chmod g+s {} \;
+       
+   Change the permissions of the directory to allow the group the access it 
+   needs to directories and files respectively:
+   
+       find /data/myvolume -type d -exec chmod 775 {} \;
+       find /data/myvolume -type f -exec chmod 664 {} \;
+       
+   Optionally, on a dev machine say, add your username to this group too, so 
+   you can access the files:  
+   
+       usermod -a -G 1024 my-username
+       
+    [Approach adapted from the link here](https://medium.com/@nielssj/docker-volumes-and-file-system-permissions-772c1aee23ca).
+
 1. Run this:
 
          docker run  \

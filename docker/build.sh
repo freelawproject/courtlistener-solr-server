@@ -113,8 +113,9 @@ function install_deb_packages() {
 
 # ===== Main
 
-
-adduser --system "${SOLR_USER}"
+# Add a group and user so that we can access bound volumes
+addgroup --gid 1024 solr
+adduser --disabled-password --system --ingroup solr "${SOLR_USER}"
 deploy_solr_distribution "$1"
 configure_solr_home
 configure_jetty_home
