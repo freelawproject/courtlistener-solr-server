@@ -12,7 +12,7 @@ set -o pipefail
 SOLR_DOWNLOAD_PATH="/tmp/solr.tgz"
 
 
-RUNTIME_DEPENDENCIES="cgroup-tools procps"
+RUNTIME_DEPENDENCIES="cgroup-tools procps bc"
 
 
 function download_file() {
