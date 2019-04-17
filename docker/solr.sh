@@ -17,10 +17,13 @@ JVM_MAX_HEAP_RATIO="0.95"
 
 
 function multiply() {
+    # Multiply two numbers. Easy, right? Except awk can sometimes be 32 bit,
+    # making it only go up to about 2GB of bytes, bash can only multiply ints,
+    # and bc can neither convert floats to ints nor strip newlines.
     local x="$1"
     local y="$2"
-
-    awk -v "x=${x}" -v "y=${y}" 'BEGIN{ printf "%i" ,x * y }'
+    local result=$(echo "$x * $y" | bc | tr -d '\n')
+    echo -n ${result%.*}
 }
 
 
