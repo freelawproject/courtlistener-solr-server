@@ -1,6 +1,7 @@
 # Docker Image for Solr v4
 
-This is a docker image that we forked from https://github.com/2degrees/docker-solr4. The original is really good, but this fork has all of our fun customizations. 
+This is a docker image that we forked from https://github.com/2degrees/docker-solr4. 
+The original is really good, but this fork has all of our fun customizations. 
 
 In theory, this fork should be very easy to use. In order to set up a working
 solr install, simply:
@@ -23,7 +24,8 @@ solr install, simply:
    Optionally, on a dev machine say, add your username to this group too, so 
    you can access the files:  
    
-       usermod -a -G 1024 my-username
+       sudo groupadd --gid 1024 solr
+       usermod -a -G solr my-username
        
     [Approach adapted from the link here](https://medium.com/@nielssj/docker-volumes-and-file-system-permissions-772c1aee23ca).
 
@@ -37,6 +39,8 @@ solr install, simply:
              -p 8983:8983 \
              --log-driver journald \
              --name solr \
+             --network cl_net_overlay \
+             --restart unless-stopped \
              freelawproject/solr 
 
 Some explanation is in order:
@@ -63,6 +67,11 @@ directory shown above.
 
 1. `--name solr` gives it a name (so we can see it in our logs, among other
    reasons).
+   
+1. `--network` ensures that it's part of the right network.
+
+1. `--restart` ensures that it restarts when docker starts, unless the service
+   was explicitly stopped.
 
 1. Finally, we list the name of the image to download (if needed) and run.
 
