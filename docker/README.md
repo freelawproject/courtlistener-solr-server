@@ -8,6 +8,12 @@ solr install, simply:
 
 1. Install Docker
 
+1. Create a directory on the host machine to store this repository, then clone this repository:
+
+    DIR=/home/my-username/courtlistener-solr-server
+    mkdir $DIR
+    git clone https://github.com/freelawproject/courtlistener-solr-server $DIR
+
 1. Create a directory on the host machine to store solr indicies, or select the
    one you have already. Then, add that directory to group ID 1024 and set make
    the group ID apply to new directories too:
