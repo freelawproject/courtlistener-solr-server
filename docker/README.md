@@ -15,8 +15,10 @@ solr install, simply:
         git clone https://github.com/freelawproject/courtlistener-solr-server $DIR
 
 1. Create a directory on the host machine to store solr indicies, or select the
-   one you have already. Then, add that directory to group ID 1024 and set make
-   the group ID apply to new directories too:
+   one you have already. Then, add that directory to group ID 1024 and make
+   the group ID apply to new directories too. "1024" is chosen as an anointed
+   value. It doesn't correspond to anything in particular; we just choose to 
+   use it here:
    
        chown -R :1024 /data/myvolume
        find /data/myvolume -type d -exec chmod g+s {} \;
