@@ -841,6 +841,14 @@
        not be initialized until the first request that uses it.
 
     -->
+  <requestHandler name="/mlt" class="solr.MoreLikeThisHandler">
+     <lst name="defaults">
+       <str name="echoParams">explicit</str>
+       <str name="wt">xml</str>
+       <str name="df">text</str>
+     </lst>
+  </requestHandler>
+
   <!-- SearchHandler
 
        http://wiki.apache.org/solr/SearchHandler
