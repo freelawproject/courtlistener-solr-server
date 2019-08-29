@@ -14,20 +14,26 @@ solr install, simply:
         mkdir $DIR
         git clone https://github.com/freelawproject/courtlistener-solr-server $DIR
 
-1. Create a directory on the host machine to store solr indicies, or select the
-   one you have already. Then, add that directory to group ID 1024 and make
-   the group ID apply to new directories too. "1024" is chosen as an anointed
-   value. It doesn't correspond to anything in particular; we just choose to 
-   use it here:
-   
-       chown -R :1024 /data/myvolume
-       find /data/myvolume -type d -exec chmod g+s {} \;
+1. We need to set the config directories and the data directories to a user 
+   that makes Solr happy. The `solr` user in this docker image has a group ID 
+   of 1024. "1024" is chosen as an anointed value. It doesn't correspond to 
+   anything in particular; we just choose it in our `build.sh` script. So, to 
+   The files that we mount into the docker container need this ID as well. We 
+   will be mounting the `data` and `solr` directories, so run the following to 
+   get them set up: 
+      
+       chown -R :1024 data
+       chown -R :1024 solr
+       find data -type d -exec chmod g+s {} \;
+       find solr -type d -exec chmod g+s {} \;
        
    Change the permissions of the directory to allow the group the access it 
    needs to directories and files respectively:
    
-       find /data/myvolume -type d -exec chmod 775 {} \;
-       find /data/myvolume -type f -exec chmod 664 {} \;
+       find data -type d -exec chmod 775 {} \;
+       find solr -type d -exec chmod 775 {} \;
+       find data -type f -exec chmod 664 {} \;
+       find solr -type f -exec chmod 664 {} \;
        
    Optionally, on a dev machine say, add your username to this group too, so 
    you can access the files:  
@@ -89,7 +95,7 @@ directory shown above.
 I'm not good at this yet, so suggestions welcome here. In the meantime, I'm 
 just building new versions using:
 
-    docker build --tag=freelawproject/solr:0.2 .
+    docker build --tag=freelawproject/solr:0.2 . --no-cache
     
 Then I push with:
 
