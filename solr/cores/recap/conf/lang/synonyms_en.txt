@@ -263,7 +263,7 @@ interdisc,interdisciplinary
 int,interest
 intro,introduction
 inv,investment,investor
-ir,ireland
+irs,internal revenue service
 isr,israel
 jan,january
 jj,judge
