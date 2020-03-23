@@ -22,7 +22,7 @@ jobs:
         run: sudo apt-get install jq curl
       - name: Start the latest image
         working-directory: courtlistener-solr-server
-        run: docker run -d -p 8983:8983 --volume solr/cores:/etc/opt/solr:ro --volume data:/var/opt/solr/indices freelawproject/solr:latest
+        run: docker run -d -p 8983:8983 --volume `pwd`/solr/cores:/etc/opt/solr:ro --volume `pwd`/data:/var/opt/solr/indices freelawproject/solr:latest
       - name: Test a simple query
         run: |
           curl 'http://localhost:8983/solr/collection1/select?q=*%3A*&wt=json&indent=true' > output.json
