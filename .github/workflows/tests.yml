@@ -25,5 +25,5 @@ jobs:
         run: docker run -d -p 8983:8983 --volume `pwd`/solr/cores:/etc/opt/solr:ro --volume `pwd`/data:/var/opt/solr/indices freelawproject/solr:latest
       - name: Test a simple query
         run: |
-          curl 'http://localhost:8983/solr/collection1/select?q=*%3A*&wt=json&indent=true' > output.json
+          curl -v 'http://127.0.0.1:8983/solr/collection1/select?q=*%3A*&wt=json&indent=true' > output.json
           jq output.json --exit-status '.response.numFound'
