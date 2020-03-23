@@ -7,11 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out solr
-          uses: actions/checkout@v2-beta
-          with:
-            repository: freelawproject/courtlistener-solr-server
-            ref: master
-            path: courtlistener-solr-server
+        uses: actions/checkout@v2-beta
+        with:
+          repository: freelawproject/courtlistener-solr-server
+          ref: master
+          path: courtlistener-solr-server
       - name: Set up solr permissions
         run: |
           cd courtlistener-solr-server
