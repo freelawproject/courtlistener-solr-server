@@ -6,5 +6,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Just run the latest image
+      - name: Check out solr
+          uses: actions/checkout@v2-beta
+          with:
+            repository: freelawproject/courtlistener-solr-server
+            ref: master
+            path: courtlistener-solr-server
+      - name: Set up solr permissions
+        run: |
+          cd courtlistener-solr-server
+          # DON'T DO THIS IN PROD!
+          sudo find data -type f -exec chmod 777 {} \;
+          sudo find solr -type f -exec chmod 777 {} \;
+      - name: Install jq & curl
+        run: apt-get install jq curl
+      - name: Start the latest image
         run: docker run freelawproject/solr:latest
+      - name: Test a simple query
+        run: curl 'http://localhost:8983/solr/collection1/select?q=*%3A*&wt=json&indent=true'
