@@ -27,7 +27,6 @@ jobs:
         run: docker ps -a
       - name: Show docker logs
         run: docker logs solr
-      - name:
       - name: Test a simple query
         run: |
           curl -v 'http://127.0.0.1:8983/solr/collection1/select?q=*%3A*&wt=json&indent=true' > output.json
