@@ -15,7 +15,7 @@ ADD build.sh /tmp/
 RUN /tmp/build.sh "${mirror_url}"
 
 ADD solr.sh /usr/local/bin/
-ADD log4j.properties "${JETTY_HOME_PATH}/resources/"
+ADD --chown=solr log4j.properties "${JETTY_HOME_PATH}/resources/"
 
 USER ${SOLR_USER}
 EXPOSE 8983
