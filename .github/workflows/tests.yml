@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Just run the latest image
-        run: docker run freelawproject/solr:0.5
+        run: docker run freelawproject/solr:latest
