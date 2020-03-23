@@ -21,7 +21,7 @@ jobs:
       - name: Install jq & curl
         run: sudo apt-get install jq curl
       - name: Start the latest image
-        run: docker run freelawproject/solr:latest
+        run: docker run -d freelawproject/solr:latest
       - name: Test a simple query
         run: curl 'http://localhost:8983/solr/collection1/select?q=*%3A*&wt=json&indent=true' | jq --exit-status '.response.numFound'
 
