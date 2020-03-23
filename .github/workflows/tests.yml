@@ -1,0 +1,10 @@
+name: docker build and test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Just run the latest image
+        run: docker run freelawproject/solr:0.5
