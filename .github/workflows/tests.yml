@@ -10,7 +10,7 @@ jobs:
         image: freelawproject/solr
         ports:
           - 8983:8983
-        options: --volume ${{ github.workspace }}/solr/cores:/etc/opt/solr:ro --volume ${{ github.workspace }}/data:/var/opt/solr/indices --name solr
+        options: --volume ${{ github.workspace }}/courtlistener-solr-server/solr/cores:/etc/opt/solr:ro --volume ${{ github.workspace }}/courtlistener-solr-server/data:/var/opt/solr/indices --name solr
     steps:
       - name: Check out solr
         uses: actions/checkout@v2-beta
