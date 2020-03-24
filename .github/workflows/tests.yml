@@ -18,16 +18,14 @@ jobs:
           # DON'T DO THIS IN PROD!
           sudo find data -type f -exec chmod 777 {} \;
           sudo find solr -type f -exec chmod 777 {} \;
-      - name: Install jq & curl
-        run: sudo apt-get install jq curl
+      - name: Install dependencies
+        run: sudo apt-get install jq
       - name: Start the latest image
         working-directory: courtlistener-solr-server
         run: docker run -d -p 8983:8983 --volume `pwd`/solr/cores:/etc/opt/solr:ro --volume `pwd`/data:/var/opt/solr/indices --name solr freelawproject/solr:latest
       - name: List docker statuses
         run: docker ps -a
-      - name: Dump docker logs on failure
-        uses: jwalton/gh-docker-logs@v1
-      - name: Test a simple query
-        run: |
-          curl -v 'http://127.0.0.1:8983/solr/collection1/select?q=*%3A*&wt=json&indent=true'
-          jq output.json --exit-status '.response.numFound'
+      - name: Check docker is running
+        # jq will convert a true/false JSON value to an exit code
+        run: docker inspect -f '{{.State.Running}}' solr | jq --exit-status '.'
+
