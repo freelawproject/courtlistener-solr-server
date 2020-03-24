@@ -27,8 +27,6 @@ jobs:
         run: docker ps -a
       - name: Dump docker logs on failure
         uses: jwalton/gh-docker-logs@v1
-        with:
-          images: 'solr'
       - name: Test a simple query
         run: |
           curl -v 'http://127.0.0.1:8983/solr/collection1/select?q=*%3A*&wt=json&indent=true' > output.json
