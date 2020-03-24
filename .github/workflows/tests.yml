@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       solr:
-        image: freelawproject/courtlistener-solr-server
+        image: freelawproject/solr
         ports:
           - 8983:8983
         options: --volume ${{ github.workspace }}/solr/cores:/etc/opt/solr:ro --volume ${{ github.workspace }}/data:/var/opt/solr/indices
@@ -28,6 +28,7 @@ jobs:
         uses: docker://docker
         with:
           args: docker restart solr
+
       - name: Install jq & curl
         run: sudo apt-get install jq curl
       - name: List docker statuses
