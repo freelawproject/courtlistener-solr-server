@@ -3,8 +3,14 @@ name: docker build and test
 on: [push, pull_request]
 
 jobs:
-  build:
+  smoke-test:
     runs-on: ubuntu-latest
+    services:
+      solr:
+        image: freelawproject/courtlistener-solr-server
+        ports:
+          - 8983:8983
+        options: --volume ${{ github.workspace }}/solr/cores:/etc/opt/solr:ro --volume ${{ github.workspace }}/data:/var/opt/solr/indices
     steps:
       - name: Check out solr
         uses: actions/checkout@v2-beta
@@ -18,11 +24,12 @@ jobs:
           # DON'T DO THIS IN PROD!
           sudo find data -type f -exec chmod 777 {} \;
           sudo find solr -type f -exec chmod 777 {} \;
+      - name: Restart solr to access repo files
+        uses: docker://docker
+        with:
+          args: docker restart solr
       - name: Install jq & curl
         run: sudo apt-get install jq curl
-      - name: Start the latest image
-        working-directory: courtlistener-solr-server
-        run: docker run -d -p 8983:8983 --volume `pwd`/solr/cores:/etc/opt/solr:ro --volume `pwd`/data:/var/opt/solr/indices --name solr freelawproject/solr:latest
       - name: List docker statuses
         run: docker ps -a
       - name: Dump docker logs on failure
