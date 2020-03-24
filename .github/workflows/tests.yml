@@ -3,7 +3,7 @@ name: docker build and test
 on: [push, pull_request]
 
 jobs:
-  build:
+  smoke-test:
     runs-on: ubuntu-latest
     steps:
       - name: Check out solr
