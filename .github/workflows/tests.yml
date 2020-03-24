@@ -24,6 +24,8 @@ jobs:
           # DON'T DO THIS IN PROD!
           sudo find data -type f -exec chmod 777 {} \;
           sudo find solr -type f -exec chmod 777 {} \;
+      - name: List docker statuses
+          run: docker ps -a
       - name: Restart solr to access repo files
         uses: docker://docker
         with:
