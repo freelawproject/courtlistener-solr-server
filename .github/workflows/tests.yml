@@ -18,6 +18,8 @@ jobs:
           repository: freelawproject/courtlistener-solr-server
           ref: master
           path: courtlistener-solr-server
+      - name: ls
+        run: ls -a ${{ github.workspace }}
       - name: Set up solr permissions
         working-directory: courtlistener-solr-server
         run: |
