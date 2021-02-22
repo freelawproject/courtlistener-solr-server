@@ -415,7 +415,7 @@ tbl,table4
 taj,tajikistan
 tanz,tanzania
 tchr,teacher
-tech,technique,technology
+tech,technique,technology,technologies
 telecomm,telecommunication
 television,televisions,tv,tvs
 temp,temporary
