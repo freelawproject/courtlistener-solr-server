@@ -13,6 +13,8 @@ jobs:
         with:
           file: docker/Dockerfile
           platforms: linux/amd64,linux/arm64
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
       - name: Debug docker
         run: docker image ls
       - name: Set up solr permissions
