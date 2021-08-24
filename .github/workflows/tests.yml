@@ -6,6 +6,8 @@ jobs:
   smoke-test:
     runs-on: ubuntu-latest
     steps:
+      - name: Switch to buildx
+        run: docker buildx create --use
       - name: Build multi architecture solr
         uses: docker/build-push-action@v2
         with:
