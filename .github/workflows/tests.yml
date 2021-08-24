@@ -12,7 +12,7 @@ jobs:
           file: docker/Dockerfile
           platforms: linux/amd64,linux/arm64
           ref: master
-          path: courtlistener-solr-server
+
       - name: Set up solr permissions
         working-directory: courtlistener-solr-server
         run: |
