@@ -96,10 +96,20 @@ I'm not good at this yet, so suggestions welcome here. In the meantime, I'm
 just building new versions using:
 
     docker build --tag=freelawproject/solr:0.2 . --no-cache
-    
+
+or
+   
+    docker buildx build --platform linux/amd64,linux/arm64 --tag=freelawproject/solr:0.2 --tag=freelawproject/solr:latest . --no-cache
+    docker buildx build --cache-from=type=local,src=cache --load  --tag=freelawproject/solr:0.2 --tag=freelawproject/solr:latest .
+
 Then I push with:
 
     docker push freelawproject/solr:0.2
+
+or 
+
+    docker buildx build --push --platform linux/amd64,linux/arm64 --tag=freelawproject/solr:0.2 --tag=freelawproject/solr:latest . --no-cache
+
     
 Simply bumping the version as things go along.
  
