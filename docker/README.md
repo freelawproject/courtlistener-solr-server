@@ -95,7 +95,7 @@ directory shown above.
 I'm not good at this yet, so suggestions welcome here. In the meantime, I'm 
 just building new versions using:
 
-    docker build --tag=freelawproject/solr:0.2 . --no-cache
+    docker build --tag=freelawproject/solr:0.21 --tag=freelawproject/solr:latest . --no-cache
     
 Then I push with:
 
@@ -107,11 +107,11 @@ explain version bump reason.
 You can use the Makefile to build and image or push an image. 
 Run the following command in the docker directory with 
 
-      make --image --file Dockerfile
+      make image --file Makefile
 
 or
 
-      make --push --file Dockerfile 
+      make push --file Makefile 
 
 to build and push the updated image to docker hub.
 
