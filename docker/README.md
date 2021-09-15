@@ -101,8 +101,19 @@ Then I push with:
 
     docker push freelawproject/solr:0.2
     
-Simply bumping the version as things go along.
- 
+Simply bumping the version as things go along in versions.txt and 
+explain version bump reason.
+
+You can use the Makefile to build and image or push an image. 
+Run the following command in the docker directory with 
+
+      make --image --file Dockerfile
+
+or
+
+      make --push --file Dockerfile 
+
+to build and push the updated image to docker hub.
 
 ## Viewing logs
 
