@@ -1,0 +1,5 @@
+0.21
+
+
+0.21 - Add multi architecture docker images
+0.20 - Switch master to main
