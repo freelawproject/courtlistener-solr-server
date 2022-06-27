@@ -28,7 +28,15 @@ function multiply() {
 
 
 function get_container_memory_bytes() {
-    cgget -n --values-only --variable memory.limit_in_bytes /
+    # This used to work...
+    #   cgget -n --values-only --variable memory.limit_in_bytes /
+    # ...but now reports an error that:
+    #   cgget: libcgroup initialization failed: Cgroup is not mounted
+    # No idea how to solve that, so using new implementation as below.
+    #
+    # If this fails again, it causes the Java Heap to be unset. If that
+    # happens, it falls back to the default, which is 16GB at present.
+    cat /sys/fs/cgroup/memory.max | tr -d '\n'
 }
 
 
