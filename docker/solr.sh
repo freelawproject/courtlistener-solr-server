@@ -4,6 +4,7 @@
 set -o nounset
 set -o errexit
 set -o pipefail
+set -x
 
 
 # ===== Configuration
@@ -35,7 +36,8 @@ function get_container_memory_bytes() {
     # No idea how to solve that, so using new implementation as below.
     #
     # If this fails again, it causes the Java Heap to be unset. If that
-    # happens, it falls back to the default, which is 16GB at present.
+    # happens, it falls back to Java's default heap size, which is 16GB at
+    # present.
     cat /sys/fs/cgroup/memory.max | tr -d '\n'
 }
 
@@ -46,7 +48,12 @@ function get_host_memory_bytes() {
 
 
 function is_container_memory_limited() {
-    (( $(get_container_memory_bytes) < $(get_host_memory_bytes) ))
+  local container_memory=$(get_container_memory_bytes)
+  if [[ $container_memory == "max" ]]; then
+    return 1
+  else
+     (( $container_memory < $(get_host_memory_bytes) ))
+  fi
 }
 
 

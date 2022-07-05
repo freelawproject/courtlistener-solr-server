@@ -1,5 +1,6 @@
-0.66
+0.67
 
+0.67 - Fix #5 in docker compose, where memory is unlimited
 0.66 - Fix #5
 0.65 - Fix version numbering
 0.21 - Add multi architecture docker images
